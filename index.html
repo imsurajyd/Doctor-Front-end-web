@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindMyDoctor.com</title>
+    <link rel="shortcut icon" href="/logo.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="/logo.webp" alt="" height="40px" width="40px" style="border-radius: 5px;"> <span> FindMyDoctor</span>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+
+            <div class="nav-btn">
+                <a href="/login page/index.html" class="signin-btn">Sign In</a>
+            </div>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="bg-blue-600 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mb-8 lg:mb-0">
+                    <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mb-4">
+                        Find the Right Doctor Near You
+                    </h1>
+                    <p class="text-xl text-blue-100 max-w-3xl">
+                        Book appointments with top-rated specialists in your area. Quality healthcare at your
+                        fingertips.
+                    </p>
+                </div>
+                <div>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/51524806-b265-4c67-b251-c7cc7ab219e5.png"
+                        alt="Diverse group of medical professionals smiling in a hospital setting with modern equipment"
+                        class="rounded-lg shadow-xl">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-10">
+        <div class="bg-white rounded-lg shadow-xl p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Find Your Doctor</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label for="specialty" class="block text-sm font-medium text-gray-700 mb-1">Specialty</label>
+                    <select id="specialty"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All Specialties</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Neurology">Neurology</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                    <input type="text" id="location" placeholder="City or ZIP"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="insurance" class="block text-sm font-medium text-gray-700 mb-1">Insurance</label>
+                    <select id="insurance"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">All Insurances</option>
+                        <option value="Blue Cross">Blue Cross</option>
+                        <option value="Aetna">Aetna</option>
+                        <option value="Medicare">Medicare</option>
+                        <option value="UnitedHealthcare">UnitedHealthcare</option>
+                    </select>
+                </div>
+                <div class="flex items-end">
+                    <button id="searchButton"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">
+                        Search Doctors
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Available Doctors</h2>
+            <div class="flex items-center">
+                <span class="text-sm text-gray-600 mr-2">Sort by:</span>
+                <select id="sortBy"
+                    class="border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option value="rating">Highest Rating</option>
+                    <option value="distance">Nearest First</option>
+                    <option value="availability">Earliest Available</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="searchResults" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Doctor cards will be dynamically inserted here -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden doctor-card transition-all duration-300">
+                <div class="p-4 flex">
+                    <div class="flex-shrink-0 mr-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a40d4282-2679-4527-a612-4fa77ae80ffb.png"
+                            alt="Dr. Sarah Johnson, female cardiologist with shoulder-length brown hair wearing white coat"
+                            class="h-24 w-24 rounded-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Dr. Sarah Johnson</h3>
+                        <p class="text-blue-600">Cardiologist</p>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4V6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z" />
+                                </svg>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-1">(124 reviews)</span>
+                        </div>
+                        <div class="mt-2 flex flex-wrap gap-1">
+                            <span class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Heart
+                                Specialist</span>
+                            <span
+                                class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">ECG</span>
+                            <span
+                                class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Angioplasty</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-3 bg-gray-50 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-600"><i class="fas fa-map-marker-alt mr-1"></i> 2.5 miles away</p>
+                        <p class="text-sm text-gray-600 mt-1"><i class="fas fa-clock mr-1"></i> Available today</p>
+                    </div>
+                    <button
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md text-sm font-medium">Book
+                        Now</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden doctor-card transition-all duration-300">
+                <div class="p-4 flex">
+                    <div class="flex-shrink-0 mr-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4fdd53ce-ebc0-4436-a27a-a6babcccbbc7.png"
+                            alt="Dr. Michael Chen, Asian dermatologist with glasses and short hair in medical attire"
+                            class="h-24 w-24 rounded-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Dr. Michael Chen</h3>
+                        <p class="text-blue-600">Dermatologist</p>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-1">(87 reviews)</span>
+                        </div>
+                        <div class="mt-2 flex flex-wrap gap-1">
+                            <span class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Skin
+                                Care</span>
+                            <span class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Acne
+                                Treatment</span>
+                            <span
+                                class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Cosmetic</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-3 bg-gray-50 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-600"><i class="fas fa-map-marker-alt mr-1"></i> 1.2 miles away</p>
+                        <p class="text-sm text-gray-600 mt-1"><i class="fas fa-clock mr-1"></i> Available tomorrow</p>
+                    </div>
+                    <button
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md text-sm font-medium">Book
+                        Now</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden doctor-card transition-all duration-300">
+                <div class="p-4 flex">
+                    <div class="flex-shrink-0 mr-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/703fa31b-7361-4019-bbce-1c9e1304c733.png"
+                            alt="Dr. Angela Martinez, Hispanic pediatrician with curly hair smiling warmly"
+                            class="h-24 w-24 rounded-full object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Dr. Angela Martinez</h3>
+                        <p class="text-blue-600">Pediatrician</p>
+                        <div class="flex items-center mt-1">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600 ml-1">(215 reviews)</span>
+                        </div>
+                        <div class="mt-2 flex flex-wrap gap-1">
+                            <span class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Child
+                                Care</span>
+                            <span
+                                class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Vaccination</span>
+                            <span
+                                class="specialty-tag bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Nutrition</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-3 bg-gray-50 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-600"><i class="fas fa-map-marker-alt mr-1"></i> 3.8 miles away</p>
+                        <p class="text-sm text-gray-600 mt-1"><i class="fas fa-clock mr-1"></i> Available today</p>
+                    </div>
+                    <button
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md text-sm font-medium">Book
+                        Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="bg-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose FindMyDoctor</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="#3b82f6">
+                            <path
+                                d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm3.5 12.09l-1.41 1.41L12 13.42 9.91 15.5 8.5 14.09 10.59 12 8.5 9.91 9.91 8.5 12 10.59l2.09-2.09 1.41 1.41L13.42 12l2.08 2.09z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Verified Doctors</h3>
+                    <p class="text-gray-600">All doctors are licensed and verified by our team of medical experts.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-check text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Easy Booking</h3>
+                    <p class="text-gray-600">Book, reschedule or cancel appointments with just a few clicks.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-comments text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Patient Reviews</h3>
+                    <p class="text-gray-600">Read authentic reviews from patients who have visited the doctors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/99e19c1b-9769-48e4-ade9-6611713f4169.png"
+                        alt="logo" class="h-8 w-8" height="50px" width="50px" style="border-radius: 5px;">
+                    <h3 class="text-lg font-semibold mb-4">FindMyDoctor</h3>
+                    <p class="text-gray-400">Connecting patients with the best healthcare providers in their area since
+                        2023.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Find a Doctor</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Specialties</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Cardiology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Dermatology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pediatrics</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Neurology</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Medical Plaza, Suite
+                        100</p>
+                    <p class="text-gray-400 mb-2"><i class="fas fa-phone mr-2"></i> (555) 123-4567</p>
+                    <p class="text-gray-400"><i class="fas fa-envelope mr-2"></i> info@findmydoctor.com</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 FindMyDoctor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Appointment Modal (Hidden by default) -->
+    <div id="appointmentModal"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Book Appointment</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mb-4">
+                <p class="text-gray-600">Appointment with: <span id="modalDoctorName" class="font-semibold">Dr. Sarah
+                        Johnson</span></p>
+                <p class="text-gray-600">Specialty: <span id="modalSpecialty" class="font-semibold">Cardiologist</span>
+                </p>
+            </div>
+            <form>
+                <div class="mb-4">
+                    <label for="appointmentDate" class="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                    <input type="date" id="appointmentDate"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label for="appointmentTime" class="block text-sm font-medium text-gray-700 mb-1">Time</label>
+                    <select id="appointmentTime"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select a time slot</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="appointmentReason" class="block text-sm font-medium text-gray-700 mb-1">Reason for
+                        visit</label>
+                    <textarea id="appointmentReason" rows="3"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" id="cancelAppointment"
+                        class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-md text-sm font-medium">Cancel</button>
+                    <button type="button" id="confirmAppointment"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Confirm
+                        Booking</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
